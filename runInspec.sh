@@ -6,7 +6,7 @@ echo "Get the attributes from the AWS environment";
 
 echo "Get Instances running in $ECSCLUSTER";
 
-for instance in $(~/.local/bin/aws ecs list-container-instances --cluster kaccdcpatestcluster | grep "arn" | awk -F / '{print $2;}' | tr -d '\"\,\ '); do
+for instance in $(~/.local/bin/aws ecs list-container-instances --cluster $ECSCLUSTER | grep "arn" | awk -F / '{print $2;}' | tr -d '\"\,\ '); do
   inst=$(~/.local/bin/aws ecs describe-container-instances --cluster $ECSCLUSTER --container-instances $instance | grep ec2InstanceId | cut -d \" -f4);
   inst_array=( "${inst_array[@]}" "$inst" );
 done
