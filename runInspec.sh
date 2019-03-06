@@ -13,6 +13,8 @@ done
 
 echo ${inst_array[@]}
 
+[ ! -d "aws-security/files" ] && mkdir aws-security/files;
+
 ~/.local/bin/aws ec2 describe-instances --instance-ids ${inst_array[@]} > aws-security/files/aws_ec2.json;
 
 echo "Getting the ECS cluster attributes"
